@@ -4,7 +4,7 @@
 
 >[STAR project page](https://linlin-dev.github.io/project/STAR)
 
->[STAR-MMRotate] (https://github.com/VisionXLab/STAR-MMRotate)
+>[STAR-MMRotate](https://github.com/VisionXLab/STAR-MMRotate)
 
 
 
