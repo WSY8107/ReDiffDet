@@ -9,7 +9,7 @@
 
 ## Download CODrone dataset
 
-The CODrone dataset can be downloaded from [official google](https://drive.google.com/file/d/1FQ6mUaOr_kATDaH7N2bObD5SRRkV7qJy/view)  [modelscope(魔塔)](https://modelscope.cn/datasets/wokaikaixinxin/CODrone/files).
+The CODrone dataset can be downloaded from [official google](https://drive.google.com/file/d/1FQ6mUaOr_kATDaH7N2bObD5SRRkV7qJy/view) or [modelscope(魔塔)](https://modelscope.cn/datasets/wokaikaixinxin/CODrone/files).
 
 **How to use modelscope(魔塔) to download CODrone**
 
@@ -56,7 +56,7 @@ The 12 classes.
 ```
 'classes':
 (
-
+    'car', 'people', 'motor', 'truck', 'traffic_sign', 'boat', 'traffic_light', 'ship', 'bicycle', 'tricycle', 'bridge', 'bus'
 )
 ```
 
