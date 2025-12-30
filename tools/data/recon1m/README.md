@@ -106,7 +106,18 @@ The 60 classes.
 ```
 'classes':
 (
- 'van', 'small car', 'building', 'road', 'airplane', 'block', 'parking lot', 'motorboat', 'dump truck', 'cargo truck', 'dry cargo ship', 'runway', 'container', 'water', 'intersection', 'fishing boat', 'other vehicle', 'storage tank', 'airport', 'other ship', 'harbor', 'engineering ship', 'tennis court', 'pool', 'solar panel', 'liquid cargo ship', 'crane', 'bus', 'passenger ship', 'warship', 'storage tank group', 'excavator', 'bridge', 'tugboat', 'basketball court', 'trailer', 'train carriage', 'football field', 'cargo', 'baseball field', 'exhaust fan', 'truck tractor', 'factory', 'roundabout', 'construction site', 'chimney', 'stadium', 'smoke', 'railway', 'boarding bridge', 'farmland', 'helipad', 'tractor', 'greenbelt', 'control tower', 'dam', 'typhoon spiral', 'typhoon eye', 'locomotive', 'gas-station'
+    'airplane', 'airport', 'baseball-field', 'basketball-court', 'block',  
+    'boarding_bridge', 'bridge', 'building', 'bus', 'cargo',  
+    'cargo-truck', 'chimney', 'construction-site', 'container', 'control-tower',  
+    'crane', 'dam', 'dry-cargo-ship', 'dump-truck', 'engineering-ship',  
+    'excavator', 'exhaust-fan', 'expressway-service-area', 'factory', 'farmland',  
+    'fishing-boat', 'football-field', 'gas-station', 'greenbelt', 'harbor',  
+    'helicopter-apron', 'intersection', 'liquid-cargo-ship', 'locomotive', 'motorboat',  
+    'other-ship', 'other-vehicle', 'parking-lot', 'passenger-ship', 'pool',  
+    'railway', 'road', 'roundabout', 'runway', 'small-car',  
+    'smoke', 'solar-panel', 'stadium', 'storage-tank', 'storage-tank-group',  
+    'tennis-court', 'terminal', 'tractor', 'trailer', 'train-carriage',  
+    'truck-tractor', 'tugboat', 'van', 'warship', 'water'
 )
 ```
 
