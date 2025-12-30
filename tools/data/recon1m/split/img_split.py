@@ -1,7 +1,3 @@
-# Copyright (c) OpenMMLab. All rights reserved.
-# Written by jbwang1997
-# Reference: https://github.com/jbwang1997/BboxToolkit
-
 import argparse
 import codecs
 import datetime
