@@ -40,7 +40,7 @@ ai4rs
 ```
 
 
-## split dota dataset
+## split ReCon1M dataset
 
 Please crop the original images into 800x800 patches with an overlap of 400 by run
 
