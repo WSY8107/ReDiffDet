@@ -39,7 +39,7 @@ ai4rs
 │   │   ├── train
 │   │   │   │   ├── img (771 png, 64GB)
 │   │   │   │   ├── object-TXT (771 txt, ~7MB)
-│   │   ├── val
+│   │   ├── val (The original paper does not use a validation set, so you don't need to download it.)
 │   │   │   │   ├── img (238 png, 32GB)
 │   │   │   │   ├── object-TXT (238 txt, ~2.5MB)
 │   │   ├── test
