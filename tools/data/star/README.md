@@ -114,8 +114,8 @@ Scene graph generation (SGG) in satellite imagery (SAI) benefits promoting under
 
 |  Detector  | mAP | Configs | Download | Note |
 | :--------: |:---:|:-------:|:--------:|:----:|
-| Deformable DETR | 17.1 | `deformable_detr_r50_1x_star` | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/deformable_detr_r50_1x_star.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/deformable_detr_r50_1x_star-fe862bb3.pth?download=true) |
-| ARS-DETR | 28.1 | `dn_arw_arm_arcsl_rdetr_r50_1x_star` | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/dn_arw_arm_arcsl_rdetr_r50_1x_star.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/dn_arw_arm_arcsl_rdetr_r50_1x_star-cbb34897.pth?download=true) |
+| Deformable DETR | 17.1 | deformable_detr_r50_1x_star | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/deformable_detr_r50_1x_star.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/deformable_detr_r50_1x_star-fe862bb3.pth?download=true) |
+| ARS-DETR | 28.1 | dn_arw_arm_arcsl_rdetr_r50_1x_star | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/dn_arw_arm_arcsl_rdetr_r50_1x_star.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/dn_arw_arm_arcsl_rdetr_r50_1x_star-cbb34897.pth?download=true) |
 | RetinaNet | 21.8 | rotated_retinanet_hbb_r50_fpn_1x_star_oc | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/rotated_retinanet_hbb_r50_fpn_1x_star_oc.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/rotated_retinanet_hbb_r50_fpn_1x_star_oc-3ec35d77.pth?download=true) |
 | ATSS | 20.4 | rotated_atss_hbb_r50_fpn_1x_star_oc | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/rotated_atss_hbb_r50_fpn_1x_star_oc.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/rotated_atss_hbb_r50_fpn_1x_star_oc-f65f07c2.pth?download=true) | 
 |  KLD  |  25.0  | rotated_retinanet_hbb_kld_r50_fpn_1x_star_oc  |  [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/rotated_retinanet_hbb_kld_r50_fpn_1x_star_oc.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/rotated_retinanet_hbb_kld_r50_fpn_1x_star_oc-343a0b83.pth?download=true) |
@@ -143,6 +143,52 @@ Scene graph generation (SGG) in satellite imagery (SAI) benefits promoting under
 | ReDet | 39.1 | redet_re50_refpn_1x_star_le90 | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/redet_re50_refpn_1x_star_le90.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/redet_re50_refpn_1x_star_le90-d163f450.pth?download=true) | [ReResNet50](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/re_resnet50_c8_batch256-25b16846.pth?download=true) |
 | Oriented RCNN | 40.7 | oriented_rcnn_swin-l_fpn_1x_star_le90 | [log](https://huggingface.co/yangxue/STAR-MMRotate/raw/main/oriented_rcnn_swin-l_fpn_1x_star_le90.log) \| [ckpt](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/oriented_rcnn_swin-l_fpn_1x_star_le90-fe6f9e2d.pth?download=true) | [Swin-L](https://huggingface.co/yangxue/STAR-MMRotate/resolve/main/swin_large_patch4_window7_224_22k_20220412-aeecf2aa.pth?download=true) |
 
+
+### Train:
+
+single node, for example:
+```
+python tools/train.py configs/oriented_rcnn/oriented-rcnn-le90_r50_fpn_1x_star.py
+```
+
+multiple node, for example:
+```
+bash tools/dist_train.sh configs/oriented_rcnn/oriented-rcnn-le90_r50_fpn_1x_star.py 2
+```
+
+### Test:
+
+single node, for example:
+```
+python tools/test.py configs/oriented_rcnn/oriented-rcnn-le90_r50_fpn_1x_star.py checkpoint_path
+```
+
+multiple node, for example:
+```
+bash tools/dist_test.sh configs/oriented_rcnn/oriented-rcnn-le90_r50_fpn_1x_star.py checkpoint_path 2
+```
+
+1) test online
+
+set `test_evaluator` in [`configs/_base_/datasets/star.py`](./../../../configs/_base_/datasets/star.py)
+```
+test_evaluator = dict(
+    type='STARMetric',
+    format_only=True,
+    merge_patches=True,
+    outfile_prefix='./work_dirs/star/Task1')
+```
+
+upload `Task1.zip` to STAR evaluation web [Codebench](https://www.codabench.org/competitions/3475/?secret_key=f1aff9f3-696d-4e10-9a63-f113153ed686)
+
+2) test local
+
+The official authors have released the gt for the test set, allowing for local evaluation.
+
+set `test_evaluator` in [`configs/_base_/datasets/star.py`](./../../../configs/_base_/datasets/star.py)
+```
+test_evaluator = val_evaluator
+```
 
 ```bibtex
 @article{li2025star,
