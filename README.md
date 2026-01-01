@@ -110,6 +110,14 @@ Coming soon
 | :---: | :---: | :---: | :---: |
 | [MMRotate SAM](./projects/mmrotate-sam/README.md) |  |   |     |   
 
+<details open>
+<summary><b>Scene graph generation (SGG)</b></summary>
+
+|     |     |     |     |
+| :---: | :---: | :---: | :---: |
+| [STAR<br>(TPAMI'2025)](./tools/data/star/README.md) |  |   |     |  
+
+
 ## Installation ⚙️
 
 To support H2rbox_v2, point2rbox, and mamba, we use **pytorch-2.x**
