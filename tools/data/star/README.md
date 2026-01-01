@@ -11,7 +11,7 @@
 
 ## Download STAR dataset
 
-The STAR dataset can be downloaded from [official hugging face](https://huggingface.co/datasets/Zhuzi24/STAR) or [official baidu netdist](https://huggingface.co/datasets/Zhuzi24/STAR) or [modelscope(魔塔)](https://modelscope.cn/datasets/wokaikaixinxin/STAR/files).
+The STAR dataset can be downloaded from [official hugging face](https://huggingface.co/datasets/Zhuzi24/STAR) or [official baidu netdist](https://pan.baidu.com/s/143LVm6zt-ryGEngltALZtw?pwd=STAR) or [modelscope(魔塔)](https://modelscope.cn/datasets/wokaikaixinxin/STAR/files).
 
 **How to use modelscope(魔塔) to download STAR**
 
@@ -47,6 +47,40 @@ ai4rs
 │   │   │   │   ├── object-TXT (264 txt, ~2.56MB)
 ```
 
+## split STAR dataset
+
+train set
+
+```shell
+python tools/data/star/split/img_split.py --base-json tools/data/star/split/split_configs/ss_train.json
+```
+
+test set
+
+```shell
+python tools/data/star/split/img_split.py --base-json tools/data/star/split/split_configs/ss_test.json
+```
+
+Please update the `img_dirs` and `ann_dirs` in json.
+
+The new data structure is as follows:
+
+```none
+ai4rs
+├── mmrotate
+├── tools
+├── configs
+├── data
+│   ├── split_ss_star
+│   │   ├── train
+│   │   │   ├── images (70383 png, only 19756 images have gt)
+│   │   │   ├── annfiles (70383 txt, only 19756 images have gt)
+│   │   ├── test
+│   │   │   ├── images (23702 png)
+│   │   │   ├── annfiles (23702 txt)
+```
+
+Please change `data_root` in `configs/_base_/datasets/star.py` to `data/split_ss_star/`.
 
 ## Classes of STAR
 
@@ -65,8 +99,6 @@ The 48 classes.
     'arch_dam', 'roundabout', 'baseball_diamond', 'stadium', 'containment_vessel'
 )
 ```
-
-
 
 ## Description
 
