@@ -55,12 +55,10 @@ val_dataloader = dict(
         pipeline=test_pipeline))
 test_dataloader = val_dataloader
 
-val_evaluator = dict(type='STARMetric',
-                     metric='mAP',
-                     ori_gt_ann_dir='data/STAR/test/object-TXT/')
-test_evaluator = val_evaluator
-# test_evaluator = dict(
-#     type='STARMetric',
-#     format_only=True,
-#     merge_patches=True,
-#     outfile_prefix='./work_dirs/star/Task1')
+val_evaluator = dict(type='DOTAMetric', metric='mAP')
+# test_evaluator = val_evaluator
+test_evaluator = dict(
+    type='DOTAMetric',
+    format_only=True,
+    merge_patches=True,
+    outfile_prefix='./work_dirs/star/Task1')
