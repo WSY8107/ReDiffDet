@@ -173,7 +173,7 @@ bash tools/dist_test.sh configs/oriented_rcnn/oriented-rcnn-le90_r50_fpn_1x_star
 set `test_evaluator` in [`configs/_base_/datasets/star.py`](./../../../configs/_base_/datasets/star.py)
 ```
 test_evaluator = dict(
-    type='STARMetric',
+    type='DOTAMetric',
     format_only=True,
     merge_patches=True,
     outfile_prefix='./work_dirs/star/Task1')
