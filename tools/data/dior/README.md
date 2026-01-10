@@ -15,6 +15,20 @@
     author = {Ke Li and Gang Wan and Gong Cheng and Liqiu Meng and Junwei Han}
 ```
 
+```bibtex
+@ARTICLE{9795321,
+  author={Cheng, Gong and Wang, Jiabao and Li, Ke and Xie, Xingxing and Lang, Chunbo and Yao, Yanqing and Han, Junwei},
+  journal={IEEE Transactions on Geoscience and Remote Sensing}, 
+  title={Anchor-Free Oriented Proposal Generator for Object Detection}, 
+  year={2022},
+  volume={60},
+  number={},
+  pages={1-11},
+  keywords={Proposals;Detectors;Object detection;Generators;Feature extraction;Remote sensing;Shape;Anchor-free oriented proposal generator (AOPG);oriented object detection;oriented proposal generation},
+  doi={10.1109/TGRS.2022.3183022}}
+
+```
+
 ## Download DIOR dataset
 
 The DIOR dataset can be downloaded from [here](https://gcheng-nwpu.github.io/#Datasets) or [modelscope(魔塔)](https://www.modelscope.cn/datasets/wokaikaixinxin/DIOR/).
