@@ -57,7 +57,7 @@ The dataset’s unique sensor homogeneity (KOMPSAT-3/3A only) provides a wellcon
 [Paper link](https://doi.org/10.22711/idr/1101)
 
 <div align=center>
-<img src="https://github.com/AHideoKuzeA/CODrone-A-Comprehensive-Oriented-Object-Detection-benchmark-for-UAV/blob/main/img/first.jpg" />
+<img src="https://mdpi-res.com/remotesensing/remotesensing-17-03774/article_deploy/html/images/remotesensing-17-03774-g002-550.jpg" />
 </div>
 
 
