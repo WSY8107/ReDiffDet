@@ -75,14 +75,14 @@ ai4rs
 ├── data
 │   ├── RSAR
 │   │   ├── train
-│   │   │   ├── annfiles
-│   │   │   ├── images
+│   │   │   ├── annfiles (78837 png or jpg)
+│   │   │   ├── images   (78837 txt)
 │   │   ├── val
-│   │   │   ├── annfiles
-│   │   │   ├── images
+│   │   │   ├── annfiles (8467 png or jpg)
+│   │   │   ├── images   (8467 txt)
 │   │   ├── test
-│   │   │   ├── annfiles
-│   │   │   ├── images
+│   │   │   ├── annfiles (8538 png or jpg)
+│   │   │   ├── images   (8538 txt)
 ```
 
 ## Change base config
