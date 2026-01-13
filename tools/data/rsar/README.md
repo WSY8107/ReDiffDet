@@ -90,6 +90,17 @@ ai4rs
 Please change `data_root` in `configs/_base_/datasets/rsar.py` to `data/rsar/`.
 
 
+## Classes of RSAR
+
+The 6 classes.
+
+```
+'classes':
+(
+    'ship', 'aircraft', 'car', 'tank', 'bridge', 'harbor'
+)
+```
+
 ## Cite
 ```bibtex
 @inproceedings{zhang2025rsar,
