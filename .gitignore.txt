@@ -1,6 +1,0 @@
-data/
-checkpoints/
-work_dirs/
-*.pth
-*.pyc
-__pycache__/
