@@ -125,3 +125,11 @@ tmp
 
 # custom
 mmrotate/.mim
+
+#myignore
+data/
+checkpoints/
+work_dirs/
+*.pth
+*.pyc
+__pycache__/
