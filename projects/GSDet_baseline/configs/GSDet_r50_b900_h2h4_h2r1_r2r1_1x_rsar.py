@@ -7,11 +7,8 @@ _base_ = [
 custom_imports = dict(
     imports=['projects.GSDet_baseline.gsdet'], allow_failed_imports=False)
 
-# =============================================================================
-# pretrain = 'https://www.modelscope.cn/models/wokaikaixinxin/ai4rs/resolve/master/GSDet_baseline/' \
-#             'pretrain/diffusiondet_r50_fpn_500-proposals_1-step_crop-ms-480-800-450k_coco_new2.pth'
-# =============================================================================
-pretrain = 'checkpoints/resnet50.pth'      
+pretrain = 'https://www.modelscope.cn/models/wokaikaixinxin/ai4rs/resolve/master/GSDet_baseline/' \
+            'pretrain/diffusiondet_r50_fpn_500-proposals_1-step_crop-ms-480-800-450k_coco_new2.pth'
 
 num_classes = 6
 num_proposals = 900
