@@ -26,8 +26,6 @@ wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -47,14 +45,13 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
-.idea/*
+.idea/
 
 # Translations
 *.mo
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 
@@ -116,20 +113,29 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .DS_Store
-.idea
-*work_dirs*
-data/
-data
-!tools/data/
-tmp
 
-# custom
-mmrotate/.mim
+# --- 核心修改部分 ---
 
-#myignore
+# 1. 基础忽略项
 data/
+tmp/
 checkpoints/
-work_dirs/
-*.pth
 *.pyc
-__pycache__/
+
+# 2. 允许 Git 进入 tools/data 但忽略其内容（除非有特定排除）
+!tools/data/
+
+# 3. work_dirs 的精细化控制
+# 允许 Git 扫描 work_dirs 目录及其子目录
+!work_dirs/
+
+# 排除所有权重文件（无论在哪）
+*.pth
+*.pkl
+*.checkpoint
+
+# 显式禁止上传 work_dirs 下的所有权重，但保留其他（log, py, json）
+work_dirs/**/*.pth
+work_dirs/**/*.pkl
+
+# --------------------
