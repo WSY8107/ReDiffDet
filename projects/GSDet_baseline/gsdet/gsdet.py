@@ -5,6 +5,9 @@ from mmdet.models.detectors.two_stage import TwoStageDetector
 from torch import Tensor
 from mmdet.structures import SampleList
 
+import torch.nn as nn
+from .ega import LFE_Module  # 引入你整理好的 EGA 模块
+
 @MODELS.register_module()
 class GSDet(TwoStageDetector):
     r"""Implementation of `GSDet`_"""
@@ -27,6 +30,17 @@ class GSDet(TwoStageDetector):
             test_cfg=test_cfg,
             data_preprocessor=data_preprocessor,
             init_cfg=init_cfg)
+        
+        # --- 新增：初始化 EGA 增强模块 ---
+        # 对应 ResNet50 的 P3(512), P4(1024), P5(2048)
+        self.ega_layers = nn.ModuleList([
+            LFE_Module(dim=512, stage=0, mlp_ratio=2.0, drop_path=0.1, 
+                       act_layer=nn.ReLU, norm_layer=dict(type='BN')), 
+            LFE_Module(dim=1024, stage=1, mlp_ratio=2.0, drop_path=0.1, 
+                       act_layer=nn.ReLU, norm_layer=dict(type='BN')), 
+            LFE_Module(dim=2048, stage=1, mlp_ratio=2.0, drop_path=0.1, 
+                       act_layer=nn.ReLU, norm_layer=dict(type='BN'))
+        ])
 
         if rpn_head is not None:
             rpn_train_cfg = train_cfg.rpn if train_cfg is not None else None
@@ -36,6 +50,33 @@ class GSDet(TwoStageDetector):
             if rpn_head_num_classes is None:
                 raise NotImplementedError
             self.rpn_head = MODELS.build(rpn_head_)
+            
+    def extract_feat(self, batch_inputs: Tensor) -> tuple:
+        #print("--- Debug: Entering extract_feat ---")
+        """提取特征并应用 EGA 拦截增强"""
+        # 1. 显式调用 backbone，不通过父类接口
+        x = self.backbone(batch_inputs)  # 返回 ResNet 的多尺度特征 (P2, P3, P4, P5)
+        
+        # 2. 转换成 list 准备增强
+        enhanced_x = list(x)
+        
+        # 3. 对 P3, P4, P5 进行增强 (对应 ResNet 输出的索引 1, 2, 3)
+        # 注意：i=1 是 P3 (512通道), i=2 是 P4 (1024通道), i=3 是 P5 (2048通道)
+        for i in range(1, len(enhanced_x)):
+            # ega_layers[0] 对应 P3, [1] 对应 P4, [2] 对应 P5
+            ega_idx = i - 1
+            if ega_idx < len(self.ega_layers):
+                # 核心修正：应用 EGA 增强
+                # 建议增加残差连接（+ x[i]）以保证训练初期的稳定性
+                enhanced_x[i] = self.ega_layers[ega_idx](enhanced_x[i]) + enhanced_x[i]
+        
+        x = tuple(enhanced_x)
+        
+        # 4. 显式传入 Neck (FPN)
+        if self.with_neck:
+            x = self.neck(x)
+            
+        return x
 
     def loss(self, batch_inputs: Tensor,
              batch_data_samples: SampleList) -> dict:

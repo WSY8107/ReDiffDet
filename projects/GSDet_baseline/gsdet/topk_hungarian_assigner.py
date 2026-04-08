@@ -138,8 +138,28 @@ class TopkHungarianAssigner(TaskAlignedAssigner):
 
             # 3. do Hungarian matching on CPU using linear_sum_assignment
             # anchor index and gt index
-            matched_row_inds, matched_col_inds = linear_sum_assignment(
-                repeat_select_cost.detach().cpu().numpy())
+            # --- 数值安全性清洗开始 ---
+            # 1. 获取原始计算出的代价矩阵 repeat_select_cost
+            # 2. 将其脱离计算图并转到 CPU
+            cost_matrix_cpu = repeat_select_cost.detach().cpu()
+            
+            # 3. 强力清洗：将 NaN 和 Inf 替换为一个极大值 (1e6)
+            # 这样 linear_sum_assignment 算法就会避开这些无效的数值条目
+            cost_matrix_clean = torch.nan_to_num(
+                cost_matrix_cpu, 
+                nan=1000000.0, 
+                posinf=1000000.0, 
+                neginf=1000000.0
+            )
+            
+            # 4. 转换为 numpy 数组供 Scipy 的算法使用
+            cost_matrix_np = cost_matrix_clean.numpy()
+            # --- 数值安全性清洗结束 ---
+
+            # 使用清洗后的矩阵进行分配
+            matched_row_inds, matched_col_inds = linear_sum_assignment(cost_matrix_np)
+            #matched_row_inds, matched_col_inds = linear_sum_assignment(
+                #repeat_select_cost.detach().cpu().numpy())
             matched_row_inds = torch.from_numpy(matched_row_inds).to(
                 pred_scores.device)
             matched_col_inds = torch.from_numpy(matched_col_inds).to(

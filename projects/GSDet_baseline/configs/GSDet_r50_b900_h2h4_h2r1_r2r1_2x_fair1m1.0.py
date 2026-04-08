@@ -225,10 +225,12 @@ model = dict(
 
 # optimizer
 optim_wrapper = dict(
+    _delete_=True,
     type='OptimWrapper',
     optimizer=dict(
-        _delete_=True, type='AdamW', lr=2.5e-5, weight_decay=1e-4),
-    clip_grad=dict(max_norm=1.0, norm_type=2))
+       type='AdamW', lr=2.5e-05, weight_decay=1e-4),
+    clip_grad=dict(max_norm=35, norm_type=2))
+
 
 train_cfg=dict(val_interval=6)
 default_hooks = dict(checkpoint=dict(interval=1))
